@@ -1,9 +1,11 @@
+import React,{ UseState } from "react";
+
 import "./todo.css";
 import Todolist from "../todo-list/toDoList";
 import ToDoCreate from "../todo-create/ToDoCreate";
 
 const todo = () => {
-    const todos = [
+    const [GetTodos, setTodos] = UseState(
         {
             id : 1,
             title : "Eat",
@@ -16,11 +18,11 @@ const todo = () => {
             id : 3,
             title :"Code",
         },
-    ];
+    );
 
     const eventCreateToDo = (todo) => {
-        todos.push(todo)
-        console.log(todos)
+        setTodos(GetTodos.concat(todo))
+        console.log(GetTodos)
     };
 
     return (
@@ -29,7 +31,7 @@ const todo = () => {
                 To-Do List
             </h3>
             <ToDoCreate onCreateToDo = {eventCreateToDo} />
-            <Todolist dataTodos = {todos} />
+            <Todolist dataTodos = {GetTodos} />
         </div>
     )
 };
